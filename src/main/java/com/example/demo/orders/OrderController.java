@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 
 @RestController
-@RequestMapping(path= "/orde.rs")
+@RequestMapping(path= "/orders")
 public class OrderController {
     @Autowired OrderRepository orderRepository;
     @Autowired OrderService orderService;

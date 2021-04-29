@@ -1,29 +1,37 @@
 package com.example.demo.orders;
 
+import com.example.demo.users.User;
 import com.example.demo.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 @Service
 public class OrderService {
 
-    @Autowired OrderRepository orderRepository;
-    @Autowired UserRepository userRepository;
-    // getall
-    //get all from specific user
-    //get one from specific user
+    private final OrderRepository orderRepository;
+    private final UserRepository userRepository;
+
+    public OrderService (OrderRepository orderRepository, UserRepository userRepository) {
+        this.orderRepository = orderRepository;
+        this.userRepository = userRepository;
+    }
 
     public Iterable<Order> getAllOrders(){
         return orderRepository.findAll();
     }
 
     public Iterable<Order> getOrdersByUserId(Long userId) {
-        System.out.println("repository called");
         return orderRepository.findByUserId(userId);
     }
 
     public Order saveOrder(Order order, Long userId)  {
-        order.setUser(userRepository.findById(userId).get());
+        Iterable<User> userArrayList = userRepository.findAll();
+
+        Optional<User> user = userRepository.findById(userId);
+        order.setUser(user.get());
         return orderRepository.save(order);
     }
 
