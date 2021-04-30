@@ -1,15 +1,12 @@
-package com.example.demo.orders;
+package com.human.orders;
 
-import com.example.demo.users.User;
+import com.human.users.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Optional;
 
-@Entity
-@Table(name="orders")
-
+@Entity(name="orders")
 public class Order {
     @Id
     @GeneratedValue
@@ -23,7 +20,6 @@ public class Order {
     private User user;
 
     public Order(){
-
     }
 
     public Order(Long id, Date date, Long userId) {
@@ -59,6 +55,12 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Order [id=" + id + ", date=" + date +
+                ", user=" + user + "]";
     }
 
 }

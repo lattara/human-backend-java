@@ -1,17 +1,20 @@
-package com.example.demo.products;
+package com.human.products;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.human.orders.Order;
 
-@Entity(name = "PRODUCTS")
+import javax.persistence.*;
+
+@Entity(name="Products")
 public class Product {
     @Id
     @GeneratedValue
     private Long id;
     private String name;
     private String description;
+    private boolean isSold;
+
+    @OneToOne
+    private Order order; // one product can only belong to one order because all of products are handmade and unique <-
 
     public Long getId() {
         return id;
@@ -37,4 +40,11 @@ public class Product {
         this.description = description;
     }
 
+    public boolean isSold() {
+        return isSold;
+    }
+
+    public void setSold(boolean sold) {
+        isSold = sold;
+    }
 }

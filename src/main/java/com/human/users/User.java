@@ -1,12 +1,10 @@
-package com.example.demo.users;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package com.human.users;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 
-@Entity (name="users")
+@Entity(name="users")
 
 public class User implements Serializable {
     @Id
