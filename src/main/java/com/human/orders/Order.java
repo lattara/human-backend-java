@@ -1,5 +1,6 @@
 package com.human.orders;
 
+import com.human.products.Product;
 import com.human.users.User;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -22,15 +23,10 @@ public class Order {
     public Order(){
     }
 
-    public Order(Long id, Date date, Long userId) {
+    public Order(Long id, Date date, Long userId, Product products) {
         this.id = id;
         this.date = date;
         this.user = new User(userId, "", "", "");
-    }
-
-    public Order(Order order, User user) {
-        this.date = order.date;
-        this.user = user;
     }
 
     public Long getId() {

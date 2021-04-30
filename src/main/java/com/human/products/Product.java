@@ -13,9 +13,6 @@ public class Product {
     private String description;
     private boolean isSold;
 
-    @OneToOne
-    private Order order; // one product can only belong to one order because all of products are handmade and unique <-
-
     public Long getId() {
         return id;
     }

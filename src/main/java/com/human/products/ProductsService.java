@@ -7,7 +7,7 @@ import java.util.Optional;
 
 
 @Service
-public class ProductService {
+public class ProductsService {
 
     @Autowired
     private ProductsRepository productsRepository;
@@ -16,18 +16,22 @@ public class ProductService {
         return productsRepository.findAll();
     }
 
-    public Iterable<Product> getUnsold(){
-        return productsRepository.getUnsold();
-    }
+    public Iterable<Product> getUnsold() { return productsRepository.getUnsold(); }
 
-    public Product save(Product product)  { return productsRepository.save(product);
-    }
+    public Iterable<Product> getSold() { return productsRepository.getSold(); }
+
     public Optional<Product> getOne(Long id) {
         return productsRepository.findById(id);
     }
 
+    public Product save(Product product)  { return productsRepository.save(product); }
+
     public void delete(Long orderId) {
-        this.productsRepository.deleteById(orderId);
+        productsRepository.deleteById(orderId);
     }
 
+    public Product update(Product product, Long productId) {
+        product.setId(productId);
+        return productsRepository.save(product);
+    }
 }
