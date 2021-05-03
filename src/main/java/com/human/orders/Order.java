@@ -5,6 +5,7 @@ import com.human.users.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,14 +20,13 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    @ManyToOne (cascade = CascadeType.PERSIST) // this is just an JPA annotation / javax.persistence
+    @ManyToOne (cascade = CascadeType.PERSIST) //  JPA annotation that hibernate interprets
     private User user;
 
     @OneToMany
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     public Order () {
-
     }
 
     public Order(User user){
@@ -61,6 +61,6 @@ public class Order {
     }
 
     public void setProduct(Product productToAdd) {
-        this.products.add(productToAdd);
+        products.add(productToAdd);
     }
 }

@@ -46,10 +46,18 @@ public class ProductsService {
         return productsRepository.save(product);
     }
 
-    public void addToCart(Long productId, Long orderId) {
+    public void addToOrder(Long productId, Long orderId) {
             //order id already exists so just add a product to it
             Order currentOrder = orderRepository.findById(orderId).get();
             currentOrder.setProduct(productsRepository.findById(productId).get());
             orderRepository.save(currentOrder);
+    }
+
+    public void createOrderAndAddProduct(Long productId) {
+        // TODO implement method to get current user and create new order for that user but for now hardcoded user to test the route
+        Order newOrder = new Order();
+        newOrder.setUser(userRepository.findById((long) 6).get());
+        newOrder.setProduct(productsRepository.findById(productId).get());
+        orderRepository.save(newOrder);
     }
 }

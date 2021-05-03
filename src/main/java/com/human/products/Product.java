@@ -13,9 +13,6 @@ public class Product {
     private String description;
     private boolean isSold = false;
 
-    @OneToOne
-    Order order;
-
     public Long getId() {
         return id;
     }
@@ -47,10 +44,5 @@ public class Product {
     public void setSold(boolean sold) {
         isSold = sold;
     }
-
-    public Order getOrder() { return order; }
-
-    public void setOrder(Order order) { this.order = order; }
-
 
 }
