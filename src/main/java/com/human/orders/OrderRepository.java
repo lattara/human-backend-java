@@ -1,5 +1,7 @@
 package com.human.orders;
 
+import com.human.products.Product;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +14,8 @@ public interface OrderRepository extends CrudRepository <Order, Long> {
    // find+By+ForeignKeyType(here -> user) + id // findByProperty // Spring JPA will implement it
    // always in camelCase of course!
    public Iterable <Order> findByUserId(Long userId);
+
+
 }
+
+

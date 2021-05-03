@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -20,13 +21,17 @@ public class ProductsController {
         return productsService.getAll();
     }
 
-    @GetMapping("/unsold")
+    @PostMapping("/new")
+    public @ResponseBody
+    Product saveProduct (@RequestBody Product product) { return productsService.save(product); }
+
+    @GetMapping("/all/unsold")
     public @ResponseBody
     Iterable<Product> getAllUnsold() {
         return productsService.getUnsold();
     }
 
-    @GetMapping("/sold")
+    @GetMapping("/all/sold")
     public @ResponseBody
     Iterable<Product> getAllSold() {
         return productsService.getSold();
@@ -44,7 +49,12 @@ public class ProductsController {
 
     @PatchMapping("/{id}")
     public Product editProduct( @RequestBody Product product, @PathVariable Long productId) {
-        return this.productsService.update(product, productId);
+        return productsService.update(product, productId);
+    }
+
+    @PostMapping("/{id}/{orderId}/addToCart")
+    public void addToChart(@PathVariable Long id, @PathVariable Long orderId) {
+        this.productsService.addToCart(id, orderId);
     }
 
 

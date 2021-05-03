@@ -6,6 +6,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+
 
 @Entity(name="orders")
 public class Order {
@@ -20,13 +22,14 @@ public class Order {
     @ManyToOne (cascade = CascadeType.PERSIST) // this is just an JPA annotation / javax.persistence
     private User user;
 
-    public Order(){
+    @OneToMany
+    private List<Product> products;
+
+    public Order () {
+
     }
 
-    public Order(Long id, Date date, Long userId, Product products) {
-        this.id = id;
-        this.date = date;
-        this.user = new User(userId, "", "", "");
+    public Order(User user){
     }
 
     public Long getId() {
@@ -53,10 +56,11 @@ public class Order {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "Order [id=" + id + ", date=" + date +
-                ", user=" + user + "]";
+    public List<Product> getProducts() {
+        return products;
     }
 
+    public void setProduct(Product productToAdd) {
+        this.products.add(productToAdd);
+    }
 }
