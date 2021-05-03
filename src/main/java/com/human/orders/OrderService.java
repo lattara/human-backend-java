@@ -10,6 +10,7 @@ import java.util.Optional;
 @Service
 public class OrderService {
 
+    //TODO refactor all the DI to inject them trough constructor (preferable way)
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
