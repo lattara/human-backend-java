@@ -3,8 +3,6 @@ package com.human.users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping(path="/users")
 
@@ -19,8 +17,9 @@ public class UserController {
     }
 
     @RequestMapping("/{id}")
-    public Optional<User> getUser(@PathVariable Long id) {
+    public User getUser(@PathVariable Long id) {
         return userService.getById(id);
+
     }
 
     @PostMapping("/new")

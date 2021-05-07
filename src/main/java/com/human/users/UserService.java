@@ -1,10 +1,9 @@
 package com.human.users;
 
 
+import com.human.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -16,8 +15,8 @@ public class UserService {
 
     public User save(User user) { return userRepository.save(user); }
 
-    public Optional<User> getById(Long id) {
-        return userRepository.findById(id);
+    public User getById(Long id) {
+        return userRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     public void delete(Long id) {
