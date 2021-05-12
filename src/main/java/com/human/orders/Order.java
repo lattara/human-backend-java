@@ -20,16 +20,15 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    @ManyToOne (cascade = CascadeType.PERSIST) //  JPA annotation that hibernate interprets
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private User user;
+
+    private Boolean is_sent;
 
     @OneToMany
     private List<Product> products = new ArrayList<>();
 
     public Order () {
-    }
-
-    public Order(User user){
     }
 
     public Long getId() {
@@ -62,5 +61,13 @@ public class Order {
 
     public void setProduct(Product productToAdd) {
         products.add(productToAdd);
+    }
+
+    public Boolean getIs_sent() {
+        return is_sent;
+    }
+
+    public void setIs_sent(Boolean is_sent) {
+        this.is_sent = is_sent;
     }
 }

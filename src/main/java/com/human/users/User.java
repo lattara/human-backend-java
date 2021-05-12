@@ -1,7 +1,13 @@
 package com.human.users;
 
+import com.human.Address;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 
 @Entity(name="users")
@@ -13,6 +19,12 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+    @OneToMany
+    private List<Address> addresses;
+    @CreationTimestamp
+    private Date timestamp;
+
+
 
     public User() {
 
@@ -61,4 +73,5 @@ public class User implements Serializable {
         return "User [id=" + id + ", firstName=" + firstName +
                 ", lastName=" + lastName + ", email=" + email   + "]";
     }
+
 }
