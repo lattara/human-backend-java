@@ -27,12 +27,8 @@ public class ProductsService {
     public Iterable<Product> getAll(Integer pageNo, Integer pageSize, String sortBy, String sortType) {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<Product> pagedResult = productsRepository.findAll(paging);
-        if(pagedResult.hasContent()) {
-            return pagedResult.getContent();
-        } else {
-            return new ArrayList<Product>() {
-            };
-        }
+        return pagedResult.hasContent() ? pagedResult.getContent() : new ArrayList<Product>();
+        //TODO implement asc and desc sort
     }
 
     public Iterable<Product> getUnsold() { return productsRepository.getUnsold(); }
