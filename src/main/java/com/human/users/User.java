@@ -2,7 +2,6 @@ package com.human.users;
 
 import com.human.Address;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,8 +22,6 @@ public class User implements Serializable {
     private List<Address> addresses;
     @CreationTimestamp
     private Date timestamp;
-
-
 
     public User() {
 

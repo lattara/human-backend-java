@@ -19,7 +19,6 @@ public class UserController {
     @RequestMapping("/{id}")
     public User getUser(@PathVariable Long id) {
         return userService.getById(id);
-
     }
 
     @PostMapping("/new")

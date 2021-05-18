@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity(name="Products")
+
 public class Product {
     @Id
     @GeneratedValue
