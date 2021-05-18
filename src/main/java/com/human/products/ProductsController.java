@@ -25,7 +25,6 @@ public class ProductsController {
             @RequestParam(defaultValue = "asc") String sortType
     ) {
         return productsService.getAll(pageNo, pageSize, sortBy, sortType);
-
     }
 
     @GetMapping("/{productId}")
