@@ -60,4 +60,11 @@ public class Product {
         isSold = sold;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }
