@@ -13,8 +13,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("ana")
-                .password("pass")
+                .withUser("admin")
+                .password("admin")
+                .roles("ADMIN")
+                .and()
+                .withUser("user")
+                .password("user")
                 .roles("USER");
     }
 
@@ -31,7 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // again we can use method chaining
         http.authorizeRequests()
                 // antMatchers() lets us decide what the path is gonna be by using the wildcards
-                .antMatchers("/**").hasRole("ADMIN")
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/users").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/").permitAll()
                 .and().formLogin();
     }
 }
