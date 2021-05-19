@@ -3,22 +3,28 @@ package com.human.products;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
+import java.util.stream.Stream;
 
 
 @RestController
 @RequestMapping("/products")
 public class ProductsController {
 
-    // here Ana check difference between @Autowired and constructor injection
+    //TODO here Ana check difference between @Autowired and constructor injection
     @Autowired
     ProductsService productsService;
 
     @GetMapping("/all")
     public @ResponseBody
-    Iterable<Product> getAllProducts () {
-        return productsService.getAll();
+    Iterable<Product> getAllProducts (
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortType
+    ) {
+        return productsService.getAll(pageNo, pageSize, sortBy, sortType);
     }
 
     @GetMapping("/{productId}")
@@ -61,6 +67,5 @@ public class ProductsController {
     public void addToNewChart(@PathVariable Long productId, @RequestParam(name="orderId", required=false) Long orderId) {
             productsService.createOrderAndAddProduct(productId);
     }
-
 
 }

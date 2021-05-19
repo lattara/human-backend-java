@@ -1,17 +1,32 @@
 package com.human.products;
 
 import com.human.orders.Order;
+import com.human.utils.ProductCategory;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity(name="Products")
+
 public class Product {
     @Id
     @GeneratedValue
     private Long id;
     private String name;
     private String description;
+    private BigDecimal price;
     private boolean isSold = false;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category", length = 8)
+    private ProductCategory category;
+
+    public ProductCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
 
     public Long getId() {
         return id;
@@ -45,4 +60,11 @@ public class Product {
         isSold = sold;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }

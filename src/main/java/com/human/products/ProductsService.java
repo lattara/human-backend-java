@@ -1,16 +1,17 @@
 package com.human.products;
 
+
 import com.human.orders.Order;
 import com.human.orders.OrderRepository;
-import com.human.users.User;
 import com.human.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -23,8 +24,9 @@ public class ProductsService {
     @Autowired
     UserRepository userRepository;
 
-    public Iterable<Product> getAll(){
-        return productsRepository.findAll();
+    public Iterable<Product> getAll(Integer pageNo, Integer pageSize, String sortBy, String sortType) {
+        Sort.Direction direction = Sort.Direction.fromString(sortType);
+        return productsRepository.findAll(PageRequest.of(pageNo, pageSize, Sort.by(direction, sortBy)));
     }
 
     public Iterable<Product> getUnsold() { return productsRepository.getUnsold(); }
@@ -60,4 +62,11 @@ public class ProductsService {
         newOrder.setProduct(productsRepository.findById(productId).get());
         orderRepository.save(newOrder);
     }
+
+    public Iterable<Product> getAllWithFilter(List queryParams){
+        System.out.println("queryParams" + queryParams);
+        return productsRepository.findAll();
+    }
+
+
 }
