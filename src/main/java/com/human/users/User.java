@@ -2,36 +2,40 @@ package com.human.users;
 
 import com.human.Address;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-
-@Entity(name="users")
-
+@Entity
+@Table (name="users")
 public class User implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
     private String firstName;
     private String lastName;
+    @Column(name="username")
+    private String userName;
     private String email;
+    private String password;
+    private boolean active;
+    private String roles;
+
     @OneToMany
     private List<Address> addresses;
     @CreationTimestamp
     private Date timestamp;
 
     public User() {
-
     }
 
-    public User(Long userId, String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
 
     public Long getId() {
         return id;
@@ -57,6 +61,14 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -65,10 +77,43 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", firstName=" + firstName +
-                ", lastName=" + lastName + ", email=" + email   + "]";
+    public String getPassword() {
+        return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
 }

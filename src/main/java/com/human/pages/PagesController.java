@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PagesController {
 
     // TODO delete this class later, it is only for learning / testing purposes
+
     @RequestMapping("/")
     public String greetingHomepage() {
         return "<h1> Welcome to human homepage </h1>";
