@@ -12,5 +12,6 @@ spring:
         show-sql: true
 
 auto: create-drop
+server.port: 8001
 #spring.security.user.name=ana
 #spring.security.user.password=pass
