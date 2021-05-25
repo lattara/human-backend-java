@@ -1,0 +1,16 @@
+spring:
+    datasource:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://${root:localhost}:3306/human?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        username: human
+        password: uUZ3FRdGZRaTm#WD
+
+    jpa:
+        generate-ddl: true
+        com.human.HibernateConn.hibernate.dialect: org.hibernate.dialect.HSQLDialect
+        hibernate.ddl-auto: update
+        show-sql: true
+
+auto: create-drop
+#spring.security.user.name=ana
+#spring.security.user.password=pass
