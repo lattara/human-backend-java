@@ -13,17 +13,17 @@ public class OrderController {
     // here Ana check difference between @Autowired and constructor injection
     @Autowired OrderService orderService;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public @ResponseBody Iterable <Order> getAllOrders (){
         return orderService.getAll();
     }
 
-    @GetMapping("/{userId}/all")
+    @GetMapping("/{userId}")
     public Iterable <Order> gerOrdersByUserId(@PathVariable Long userId){
         return orderService.getByUserId(userId);
     }
 
-    @PostMapping("/{userId}/new")
+    @PostMapping("/{userId}")
     public void addOrder(@RequestBody Order order, @PathVariable Long userId) {
         orderService.save(order, userId);
     }

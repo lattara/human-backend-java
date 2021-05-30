@@ -11,7 +11,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public @ResponseBody Iterable <User> getAllUsers (){
         return userService.getAll();
     }
@@ -21,12 +21,12 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @PostMapping("/new")
+    @PostMapping("/")
     public User addNewUser (@RequestBody User user){
         return userService.save(user);
     }
 
-    @PatchMapping("/{id}/update")
+    @PatchMapping("/{id}")
     public User updateUser(@RequestBody User user, @PathVariable Long id) {
         return userService.update(user, id);
     }
