@@ -16,7 +16,7 @@ public class ProductsController {
     @Autowired
     ProductsService productsService;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public @ResponseBody
     Iterable<Product> getAllProducts (
             @RequestParam(defaultValue = "0") Integer pageNo,
@@ -32,7 +32,7 @@ public class ProductsController {
         return productsService.getOne(productId).get();
     }
 
-    @PostMapping("/new")
+    @PostMapping("")
     public @ResponseBody
     Product saveProduct (@RequestBody Product product) { return productsService.save(product); }
 
