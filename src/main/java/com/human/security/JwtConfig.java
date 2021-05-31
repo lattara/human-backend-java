@@ -33,7 +33,7 @@ public class JwtConfig {
                 .signWith(SignatureAlgorithm.HS512, JWT_SECRET).compact();
     }
 
-    public boolean validateToken(String token, MyUserDetails userDetails) {
+    public boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
