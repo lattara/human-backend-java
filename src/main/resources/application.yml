@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+    url: "jdbc:mysql://${root:localhost}:3306/human?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+    username: "human"
+    password: "uUZ3FRdGZRaTm#WD"
+
+  jpa:
+  generate-ddl: true
+  com.human.HibernateConn.hibernate.dialect: "org.hibernate.dialect.HSQLDialect"
+  hibernate.ddl-auto: "update"
+  show-sql: true
+
+  security:
+    oauth2:
+      client:
+        clientId: 2950491245277160
+        clientSecret: a5b8ad7aad3c23f602e4623b917180ad
+        accessTokenUri:
+        userAuthorizationUri: https://facebook.com/dialog/oauth
+        tokenName: oauth_token
+        authenticationScheme: query
+        clientAuthenticationScheme: form
+        resource: userInfoUri:https://graph.facebook.com/me
+
+
