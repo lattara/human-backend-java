@@ -19,12 +19,12 @@ public class ProductsController {
     @GetMapping("")
     public @ResponseBody
     Iterable<Product> getAllProducts (
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "20") Integer size,
+            @RequestParam(defaultValue = "id") String sort,
             @RequestParam(defaultValue = "asc") String sortType
     ) {
-        return productsService.getAll(pageNo, pageSize, sortBy, sortType);
+        return productsService.getAll(page, size, sort, sortType);
     }
 
     @GetMapping("/{productId}")
