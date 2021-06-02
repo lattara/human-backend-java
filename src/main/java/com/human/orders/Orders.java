@@ -1,5 +1,6 @@
 package com.human.orders;
 
+import com.human.Address;
 import com.human.products.Product;
 import com.human.users.User;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,24 +13,30 @@ import java.util.List;
 
 
 @Entity
-public class Order {
+public class Orders {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    @Column(name="created")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @Column(name = "is_sent")
+    private Boolean isSent;
+
+    @ManyToOne (cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private User user;
 
-    private Boolean is_sent;
+    @OneToOne
+    private Address dispatchAddress;
 
     @OneToMany
     private List<Product> products = new ArrayList<>();
 
-    public Order () {
+
+    public Orders() {
     }
 
     public Long getId() {
@@ -65,10 +72,10 @@ public class Order {
     }
 
     public Boolean getIs_sent() {
-        return is_sent;
+        return isSent;
     }
 
-    public void setIs_sent(Boolean is_sent) {
-        this.is_sent = is_sent;
+    public void setIs_sent(Boolean isSent) {
+        this.isSent = isSent;
     }
 }

@@ -1,6 +1,5 @@
 package com.human.products;
 
-import com.human.orders.Order;
 import com.human.utils.ProductCategory;
 
 import javax.persistence.*;
@@ -10,15 +9,26 @@ import java.math.BigDecimal;
 
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column (name="description")
     private String description;
+
+    @Column(name = "price")
     private BigDecimal price;
+
+    @Column(name="is_sold")
     private boolean isSold = false;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "category", length = 8)
     private ProductCategory category;
+
+
 
     public ProductCategory getCategory() {
         return category;

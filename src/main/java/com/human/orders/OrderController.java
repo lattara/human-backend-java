@@ -14,22 +14,22 @@ public class OrderController {
     @Autowired OrderService orderService;
 
     @GetMapping("")
-    public @ResponseBody Iterable <Order> getAllOrders (){
+    public @ResponseBody Iterable <Orders> getAllOrders (){
         return orderService.getAll();
     }
 
     @GetMapping("/{userId}")
-    public Iterable <Order> gerOrdersByUserId(@PathVariable Long userId){
+    public Iterable <Orders> gerOrdersByUserId(@PathVariable Long userId){
         return orderService.getByUserId(userId);
     }
 
     @PostMapping("/{userId}")
-    public void addOrder(@RequestBody Order order, @PathVariable Long userId) {
-        orderService.save(order, userId);
+    public void addOrder(@RequestBody Orders orders, @PathVariable Long userId) {
+        orderService.save(orders, userId);
     }
 
     @GetMapping("/{userId}/{orderId}")
-    public Optional<Order> getSpecificOrder(@PathVariable Long orderId){
+    public Optional<Orders> getSpecificOrder(@PathVariable Long orderId){
         return orderService.getOne(orderId);
     }
 

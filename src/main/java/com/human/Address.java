@@ -1,20 +1,29 @@
 package com.human;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Address {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(name="street")
     private String street;
+
+    @Column(name="street_number")
     private String streetNumber;
+
+    @Column(name = "city")
     private String city;
+
+    @Column(name="country")
     private String country;
+
+    @Column(name="phone_number", length = 15)
     private String phoneNumber;
+
 
     public String getStreet() {
         return street;

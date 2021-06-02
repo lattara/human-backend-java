@@ -16,21 +16,21 @@ public class OrderService {
     @Autowired
     private UserRepository userRepository;
 
-    public Iterable<Order> getAll(){
+    public Iterable<Orders> getAll(){
         return orderRepository.findAll();
     }
 
-    public Iterable<Order> getByUserId(Long userId) {
+    public Iterable<Orders> getByUserId(Long userId) {
         return orderRepository.findByUserId(userId);
     }
 
-    public Order save(Order order, Long userId)  {
+    public Orders save(Orders orders, Long userId)  {
         User user = userRepository.findById(userId).get();
-        order.setUser(user);
-        return orderRepository.save(order);
+        orders.setUser(user);
+        return orderRepository.save(orders);
     }
 
-    public Optional<Order> getOne(Long id) {
+    public Optional<Orders> getOne(Long id) {
         return orderRepository.findById(id);
     }
 

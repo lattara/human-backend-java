@@ -1,13 +1,11 @@
 package com.human.products;
 
 
-import com.human.orders.Order;
+import com.human.orders.Orders;
 import com.human.orders.OrderRepository;
 import com.human.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -50,17 +48,17 @@ public class ProductsService {
 
     public void addToOrder(Long productId, Long orderId) {
             //order id already exists so just add a product to it
-            Order currentOrder = orderRepository.findById(orderId).get();
-            currentOrder.setProduct(productsRepository.findById(productId).get());
-            orderRepository.save(currentOrder);
+            Orders currentOrders = orderRepository.findById(orderId).get();
+            currentOrders.setProduct(productsRepository.findById(productId).get());
+            orderRepository.save(currentOrders);
     }
 
     public void createOrderAndAddProduct(Long productId) {
         // TODO implement method to get current user and create new order for that user but for now hardcoded user to test the route
-        Order newOrder = new Order();
-        newOrder.setUser(userRepository.findById((long) 6).get());
-        newOrder.setProduct(productsRepository.findById(productId).get());
-        orderRepository.save(newOrder);
+        Orders newOrders = new Orders();
+        newOrders.setUser(userRepository.findById((long) 6).get());
+        newOrders.setProduct(productsRepository.findById(productId).get());
+        orderRepository.save(newOrders);
     }
 
     public Iterable<Product> getAllWithFilter(List queryParams){

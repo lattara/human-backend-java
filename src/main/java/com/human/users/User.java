@@ -17,25 +17,37 @@ import java.util.List;
 @Table (name="users")
 public class User implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+
+    @Column(name="first_name")
     private String firstName;
+
+    @Column(name="last_name")
     private String lastName;
+
     @Column(name="username")
     private String userName;
+
+    @Column(name="email")
     private String email;
+
+    @Column(name="password")
     private String password;
-    private boolean active;
+
+    @Column(name="is_active")
+    private boolean isActive;
     private String roles;
 
     @OneToMany
     private List<Address> addresses;
+
+    @Column(name="created_at")
     @CreationTimestamp
-    private Date timestamp;
+    private Date createdAt;
 
     public User() {
     }
-
 
     public Long getId() {
         return id;
@@ -86,11 +98,11 @@ public class User implements Serializable {
     }
 
     public boolean isActive() {
-        return active;
+        return isActive;
     }
 
     public void setActive(boolean active) {
-        this.active = active;
+        this.isActive = active;
     }
 
     public String getRoles() {
@@ -110,10 +122,10 @@ public class User implements Serializable {
     }
 
     public Date getTimestamp() {
-        return timestamp;
+        return createdAt;
     }
 
     public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+        this.createdAt = timestamp;
     }
 }
