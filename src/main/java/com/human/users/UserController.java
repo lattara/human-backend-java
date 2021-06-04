@@ -41,11 +41,10 @@ public class UserController {
         return userService.update(user, id);
     }
 
+
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.delete(id);
     }
-
-
 
 }
