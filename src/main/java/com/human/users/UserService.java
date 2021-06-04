@@ -14,16 +14,15 @@ public class UserService{
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     public Iterable<User> getAll(){
         return userRepository.findAll();
     }
 
     public User save(User user) {
-        // TODO implement if user with email exists
-
         User newUser = new User();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
         newUser.setFirstName(user.getFirstName());
         newUser.setLastName(user.getLastName());
         newUser.setActive(user.isActive());
@@ -31,8 +30,8 @@ public class UserService{
         newUser.setEmail(user.getEmail());
         newUser.setRoles(user.getRoles());
         newUser.setUserName(user.getUserName());
-        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        newUser.setPassword(encodedPassword);
+        return userRepository.save(newUser);
 
     }
 
