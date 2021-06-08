@@ -1,6 +1,10 @@
 package com.human.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 public class AuthRequest {
+
     private String username;
     private String password;
 

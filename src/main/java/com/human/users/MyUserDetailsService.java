@@ -1,6 +1,13 @@
 package com.human.users;
 
+import com.human.security.AuthRequest;
+import com.human.security.AuthResponse;
+import com.human.security.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,6 +24,16 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    UserDetailsService userDetailsService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    JwtConfig jwtConfig;
+
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -46,4 +63,17 @@ public class MyUserDetailsService implements UserDetailsService {
         }
         return newUser;
     }
+
+    public ResponseEntity<AuthResponse> login (AuthRequest authRequest) throws Exception {
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
+        final String jwt = jwtConfig.generateToken(userDetails);
+            try {
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(authRequest.getUsername(),authRequest.getPassword()));
+            } catch (BadCredentialsException ex){
+                throw new  Exception("Credentials not correct");
+            }
+        return ResponseEntity.ok(new AuthResponse(jwt));
+    }
+
 }
