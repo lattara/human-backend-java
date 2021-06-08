@@ -31,11 +31,6 @@ public class UserController {
         return userService.getById(id);
     }
 
-    @PostMapping("/")
-    public User addNewUser (@RequestBody User user){
-        return userService.save(user);
-    }
-
     @PatchMapping("/{id}")
     public User updateUser(@RequestBody User user, @PathVariable Long id) {
         return userService.update(user, id);

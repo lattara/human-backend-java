@@ -1,6 +1,10 @@
 package com.human.security;
 
+import com.human.users.MyUserDetailsService;
+import com.human.users.User;
+import com.human.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,11 +25,16 @@ public class SecurityController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     UserDetailsService userDetailsService;
 
     @Autowired
-    JwtConfig jwtConfig;
+    MyUserDetailsService myUserDetailsService;
 
+    @Autowired
+    JwtConfig jwtConfig;
 
     @PostMapping("")
     public ResponseEntity<?> authenticate(@RequestBody AuthRequest authRequest) throws Exception{
@@ -40,6 +49,15 @@ public class SecurityController {
         final String jwt = jwtConfig.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthResponse(jwt));
+    }
 
+    @PostMapping("/register")
+    public ResponseEntity<User> addNewUser (@RequestBody User user) throws Exception {
+        try {
+            myUserDetailsService.register(user);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+        return new ResponseEntity <User>(user, HttpStatus.CREATED);
     }
 }

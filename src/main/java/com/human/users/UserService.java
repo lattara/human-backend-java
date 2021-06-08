@@ -20,7 +20,9 @@ public class UserService{
         return userRepository.findAll();
     }
 
-    public User save(User user) { return userRepository.save(user); }
+    public User save(User user) {
+        return userRepository.save(user);
+    }
 
     public User getById(Long id) {
         return userRepository.findById(id).orElseThrow(NotFoundException::new);
