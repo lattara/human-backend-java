@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class   MyUserDetailsService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
@@ -27,14 +27,17 @@ public class   MyUserDetailsService implements UserDetailsService {
 
     public User register(User user) throws Exception {
         User newUser = new User();
-        if(userRepository.findByUserName(user.getUserName()).isPresent()) {
+        if(userRepository.existsByEmail(user.getEmail())) {
+            throw new Exception("Email is taken");
+        }
+        if(userRepository.findByUserName(user.getUserName()).isPresent()){
             throw new Exception("Username is taken");
-        } else {
-
+        }
+        else {
             newUser.setPassword(passwordEncoder.encode(user.getPassword()));
             newUser.setUserName(user.getUserName());
             newUser.setActive(user.isActive());
-            newUser.setRoles("ADMIN");
+            newUser.setRoles(user.getRoles());
             newUser.setEmail(user.getEmail());
             newUser.setAddresses(null);
             newUser.setFirstName(user.getFirstName());
